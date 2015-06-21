@@ -10,7 +10,20 @@
 			display: table;
 			background-color: $red-color;
 			color: white;
-			padding: 0 0.25em;
+			padding: 0.125em 0.25em;
+			position: relative;
+
+			&.section-heading__bubble:after {
+				content: "";
+				position: absolute;
+				bottom: -12px;
+				left: 15px;
+				border-width: 12px 8px 0;
+				border-style: solid;
+				border-color: $red-color transparent;
+				display: block;
+				width: 0;
+			}
 			
 	}
 

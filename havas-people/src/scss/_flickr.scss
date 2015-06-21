@@ -4,6 +4,10 @@
 		max-width: 30%;
 		max-height: 20%;
 		margin: 1%;
+
+		&.flicker-feed-thumb__selected {
+			border: 2px solid red;
+		}
 	}
 
 }
