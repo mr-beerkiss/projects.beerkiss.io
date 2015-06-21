@@ -1,0 +1,32 @@
+{
+  "bitwise": true,
+  "laxcomma": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "nonew": false,
+
+  // enforce a particular kind of quoting for strings
+  "quotmark": "double",
+  "undef": true,
+  "unused": true,
+  "devel": true,
+  "trailing": true,
+  "browser": true,
+  "sub": true,
+  "debug": true,
+  // enabled strict mode
+  "strict" : true,
+
+  // define expected global objects
+  // I think the boolean marks the object as read only
+  "globals" : {
+    "app" : false
+  }
+  
+}

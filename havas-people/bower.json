@@ -1,0 +1,21 @@
+{
+  "name": "bower.json",
+  "version": "1.0.0",
+  "authors": [
+    "Darren Beukes <darren.beukes@gmail.com>"
+  ],
+  "description": "Havas",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "https://github.com/mr-beerkiss",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  
+  "dependencies": {
+  }
+}
