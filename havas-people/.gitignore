@@ -5,3 +5,6 @@ bower_components
 
 # Mac files
 .DS_Store
+
+# local logs
+npm-debug.log

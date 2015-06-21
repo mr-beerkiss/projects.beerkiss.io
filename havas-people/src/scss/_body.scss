@@ -1,20 +1,49 @@
 .the-body {
 		
-	margin: 0 10%;
+	.key-area {
+		display: inline-block;
+		position: relative;
+		overflow: hidden;
+		@each $tile-image in ( our-clients place-to-work ) {
 
+			width: (555px  * 0.666 );
+			height: (362px * 0.666 );
 
-	.page-title-container {
-		background-color: red;
-		color: white;
+			background : {
+				size: 100%;
+				position: center center;
+				repeat: no-repeat;
+			}
 
-		width: 30%;
+			&.key-area__#{$tile-image} {
+				
+				$tile-image-url: "../images/#{$tile-image}.png";
+				background-image: url($tile-image-url);
 
-		.page-title-text {
-			font-weight: 400;
-			text-align: center;
-			
+			}
 		}
-	}
 
+		.key-area-data {
+			position: absolute;
+			bottom: 0;
+			color: white;
+			left: 5%;
+
+			.key-area-heading {
+				margin: 0;
+				font-size: 1em;
+				font-weight: 500;
+			}
+
+			.key-area-list {
+				list-style: none;		
+				padding: 0;
+				
+				font-size: 0.75em;
+				
+			}
+		}
+
+	}
 	
 }

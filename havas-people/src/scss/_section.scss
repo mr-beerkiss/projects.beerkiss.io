@@ -1,0 +1,21 @@
+.section {
+
+	$red-color: rgb(220, 2, 46);
+
+	margin: 0 10%;
+	
+	.section-heading {
+			font-weight: 400;
+			text-align: center;
+			display: table;
+			background-color: $red-color;
+			color: white;
+			padding: 0 0.25em;
+			
+	}
+
+	.section-sub-heading {
+		font-weight: 400;
+	}
+
+}
