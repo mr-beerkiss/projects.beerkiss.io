@@ -41,7 +41,21 @@
 				
 				font-size: 0.75em;
 				
+				li {
+				
+					margin-bottom: 0.5em;
+
+					img.key-area-list-arrow {
+						height: 1em;
+						margin-left: 0.5em;
+						transform: translateY(15%);
+					}		
+				}
+
+				
 			}
+
+			
 		}
 
 	}

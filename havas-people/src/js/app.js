@@ -11,7 +11,10 @@ window.app = window.app || (function(window, undefined) {
 		var tags = "london";
 		var script = document.createElement("script");
 		script.src = "http://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=app.feedLoadCallback&tags=" + tags;
-		document.head.appendChild(script);
+		
+		var docHead = document.head || document.getElementsByTagName("head")[0];
+
+		docHead.appendChild(script);
 
 		var menuButtonElm = document.querySelector(".navbar-menu-button");
 
@@ -31,10 +34,24 @@ window.app = window.app || (function(window, undefined) {
 	}
 
 
+	function updateLocalStorage() {
+		if ( "localStorage" in window ) {
+			window.localStorage["saved-images"] = JSON.stringify(savedImages);
+		}
+	}
+
+	function checkLocalStorageForSavedImages() {
+		if ( "localStorage" in window ) {
+			var lsSavedImages = window.localStorage["saved-images"];
+
+			if ( typeof lsSavedImages === "string" ) {
+				savedImages = JSON.parse(lsSavedImages);
+			}
+		}
+	}
 
 
-
-	function inputHandler(name) {
+	function inputHandler(link) {
 
 		return function(e) {
 
@@ -48,24 +65,27 @@ window.app = window.app || (function(window, undefined) {
 					classesArray.splice(selectedClassIndex, 1);
 
 					// remove it from the array
-					var savedNameIndex = classesArray.indexOf(name);
+					var savedNameIndex = classesArray.indexOf(link);
 
 					if ( !!~savedNameIndex ) {
 
 						savedImages.splice(savedNameIndex, 1);
 
 					} else {
-						console.error("Whoops couldn't find the image " +  name + " in the array");
+						console.error("Whoops couldn't find the image " +  link + " in the array");
 					}
 
 				} else {
 					// add the class
 					classesArray.push("flicker-feed-thumb__selected");
-					savedImages.push(name);	
+					savedImages.push(link);	
 				}
 
 				
 				this.className = classesArray.join( " " );
+				updateLocalStorage();
+
+
 		
 			}
 			
@@ -81,15 +101,26 @@ window.app = window.app || (function(window, undefined) {
 
 		var items = data.items;
 
+		checkLocalStorageForSavedImages();
+
 		for ( var i=0; i < items.length; i++ ) {
 			var imgSrc = items[i].media.m;
 
 			
 			var img = document. createElement("img");
 			img.src = imgSrc;
-			img.className = "flickr-feed-thumb";
+			
+			var classString = "flickr-feed-thumb";
+
+			if ( !!~savedImages.indexOf(items[i].link) ) {
+				classString += " flicker-feed-thumb__selected";
+			}
+
+			img.className = classString;
+
+
 		
-			img.addEventListener(eventType, inputHandler(items[i].name));
+			img.addEventListener(eventType, inputHandler(items[i].link));
 
 			container.appendChild(img);
 
@@ -98,10 +129,10 @@ window.app = window.app || (function(window, undefined) {
 
 	// Some changes to the JS
 
-	return Object.freeze({
+	return {
 		ready: ready,
 		feedLoadCallback: feedLoadCallback,
-	});
+	};
 
 })(window);
 	

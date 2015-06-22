@@ -57,13 +57,13 @@ gulp.task("scripts", function() {
 		.pipe(jshint.reporter("default"))
 		.pipe(concat("main.min.js"))
 		.pipe(gulp.dest(paths.dist+"/js"))
-		.pipe(uglify({
+		/*.pipe(uglify({
 			// some options here: https://www.npmjs.com/package/gulp-uglify
 			// all options here: https://github.com/mishoo/UglifyJS2#the-simple-way
 			outSourceMaps: false,	// for generating .map. files 
 			mangle: true			// skip mangling names
 			}))
-		.pipe(gulp.dest(paths.dist+"/js"))
+		.pipe(gulp.dest(paths.dist+"/js"))*/
 		.on("error", gutil.log);
 
 });
