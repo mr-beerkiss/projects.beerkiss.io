@@ -2,6 +2,7 @@ var gulp = require("gulp"),
 	del = require("del"),
 	gutil = require("gutil"),
 	sass = require("gulp-sass"),
+	autoprefixer = require("gulp-autoprefixer"),
 	jshint = require("gulp-jshint"),
 	concat = require("gulp-concat"),
 	uglify = require("gulp-uglify"),
@@ -41,6 +42,10 @@ gulp.task("sass", function() {
 	// TODO: Auto-prefixer
 	gulp.src(paths.scss)
 		.pipe(sass())
+		.pipe(autoprefixer({
+			browsers: ["last 2 versions"],
+			cascade: false	
+		}))
 		//.pipe(minifycss())
 		.pipe(gulp.dest(paths.dist+"/css"))
 		.on("error", gutil.log);	

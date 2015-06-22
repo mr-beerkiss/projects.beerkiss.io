@@ -4,12 +4,30 @@ window.app = window.app || (function(window, undefined) {
 	var savedImages = [];
 	var eventType = "ontouchstart" in window ? "touchend" : "click";
 
+	var mobileMenuVisible = false;
+
 	function ready() {
 		//console.debug("App is ready");
 		var tags = "london";
 		var script = document.createElement("script");
 		script.src = "http://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=app.feedLoadCallback&tags=" + tags;
 		document.head.appendChild(script);
+
+		var menuButtonElm = document.querySelector(".navbar-menu-button");
+
+		var mobileMenuEl = document.querySelector(".nav-mobile");
+
+		menuButtonElm.onclick = function(e) {
+
+			mobileMenuEl.className = "nav-mobile";
+
+			if ( !mobileMenuVisible ) {
+				mobileMenuEl.className += " nav-mobile__animate_out";
+			} 
+
+			mobileMenuVisible = !mobileMenuVisible;
+
+		};
 	}
 
 

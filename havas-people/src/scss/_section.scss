@@ -3,6 +3,8 @@
 	$red-color: rgb(220, 2, 46);
 
 	margin: 0 10%;
+
+	color: #3a3a3a;
 	
 	.section-heading {
 			font-weight: 400;
@@ -29,6 +31,16 @@
 
 	.section-sub-heading {
 		font-weight: 400;
+	}
+
+	.section-text {
+		font-size: 0.75em;
+	}
+
+	.section-divider {
+	  border-style: solid;
+	  border-width: 1px 0 0 0;
+	  color: rgb(201, 201, 201);
 	}
 
 }
