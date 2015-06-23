@@ -20,7 +20,7 @@ window.app = window.app || (function(window, undefined) {
 
 		var mobileMenuEl = document.querySelector(".nav-mobile");
 
-		menuButtonElm.onclick = function(e) {
+		menuButtonElm.onclick = function(e) {	// jshint ignore:line
 
 			mobileMenuEl.className = "nav-mobile";
 
@@ -53,10 +53,15 @@ window.app = window.app || (function(window, undefined) {
 
 	function inputHandler(link) {
 
-		return function(e) {
+		return function(e) {	// jshint ignore:line
 
-			if ( typeof this.className === "string" ) {
-				var classesArray = this.className.split(" ");
+			console.log("Hellooooooo?");
+
+			// More IE8 Support
+			var targetElement = e.target || e.srcElement;
+
+			if ( typeof targetElement.className === "string" ) {
+				var classesArray = targetElement.className.split(" ");
 			
 				var selectedClassIndex = classesArray.indexOf("flicker-feed-thumb__selected");
 
@@ -82,10 +87,8 @@ window.app = window.app || (function(window, undefined) {
 				}
 
 				
-				this.className = classesArray.join( " " );
+				targetElement.className = classesArray.join( " " );
 				updateLocalStorage();
-
-
 		
 			}
 			
@@ -95,7 +98,6 @@ window.app = window.app || (function(window, undefined) {
 	}
 
 	function feedLoadCallback(data) {
-		console.debug(data);
 
 		var container = document.querySelector(".section.flickr-feed");
 
@@ -105,8 +107,7 @@ window.app = window.app || (function(window, undefined) {
 
 		for ( var i=0; i < items.length; i++ ) {
 			var imgSrc = items[i].media.m;
-
-			
+						
 			var img = document. createElement("img");
 			img.src = imgSrc;
 			
@@ -118,10 +119,13 @@ window.app = window.app || (function(window, undefined) {
 
 			img.className = classString;
 
-
+			if ( img.addEventListener ) {
+				img.addEventListener(eventType, inputHandler(items[i].link));	
+			} else {
+				// IE 8 Support
+				img.attachEvent("onclick", inputHandler(items[i].link));
+			}
 		
-			img.addEventListener(eventType, inputHandler(items[i].link));
-
 			container.appendChild(img);
 
 		}

@@ -3,10 +3,16 @@
 	.flickr-feed-thumb {
 		max-width: 30%;
 		max-height: 20%;
-		margin: 1%;
+		margin: 1em;
+		opacity: 0.5;
+
+		&:hover {
+			opacity: 1.0;
+		}
 
 		&.flicker-feed-thumb__selected {
 			border: 2px solid red;
+			opacity: 1.0;
 		}
 	}
 
