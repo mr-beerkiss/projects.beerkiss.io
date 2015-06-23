@@ -40,7 +40,7 @@ Just to create the built folder
 ## Known Issues ##
 
 * Image content does not fill entire width elastically
-
+* X-UA-Compatible validation error is due to missing header in gulp's connect server
 
 ## Other Notes ##
 
