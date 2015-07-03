@@ -129,7 +129,7 @@ window.battleshipGrid = window.battleshipGrid || function() {
 				hitType = battleshipGrid.HIT;	
 			}
 			
-			shipHit = shipId;
+			shipHit = ships[shipId];
 			
 		} else if ( grid[x][y] === "x" ) {
 			hitType = battleshipGrid.ALREADY_HIT;

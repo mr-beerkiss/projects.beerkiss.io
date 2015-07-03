@@ -4,8 +4,11 @@ window.app = window.app || (function(window, undefined) {
 	var model;
 	var textField;
 	var statusText;
+	var gridContainer;
 
 	var shipsSunk = 0;
+
+	var gridHidden = true;
 
 	var GRID_ROW_MAP = [
 		"a",
@@ -22,6 +25,7 @@ window.app = window.app || (function(window, undefined) {
 
 	function init() {
 		model = battleshipGrid();
+		gridContainer = document.querySelector(".battleship-grid");
 
 		createGrid();
 	}
@@ -29,8 +33,6 @@ window.app = window.app || (function(window, undefined) {
 	function createGrid() {
 
 		var grid = model.getGrid();
-
-		var container = document.querySelector(".battleship-grid");
 
 		var gridSize = model.getSize();
 
@@ -59,10 +61,20 @@ window.app = window.app || (function(window, undefined) {
 				row.appendChild(cell);
 			}
 
-			container.appendChild(row);
+			gridContainer.appendChild(row);
 
 		}
-	}	
+	}
+
+	function toggleGrid() {
+		if ( gridHidden ) {
+			gridContainer.classList.remove("hidden");
+		} else {
+			gridContainer.classList.add("hidden");
+		}
+
+		gridHidden = !gridHidden;
+	}
 
 	function handleInput() {
 
@@ -118,6 +130,7 @@ window.app = window.app || (function(window, undefined) {
 				cell.classList.add("x");
 
 				if ( hit === battleshipGrid.KILLING_BLOW ) {
+
 					var shipType = hitResult.ship.size === 5 ? "Battleship" : "Destroyer";
 
 					message = "Well done! You sunk a " + shipType;
@@ -129,7 +142,7 @@ window.app = window.app || (function(window, undefined) {
 					}
 
 				} else {
-					message = input + "is a hit";
+					message = input + " is a hit";
 				}
 
 
@@ -144,7 +157,8 @@ window.app = window.app || (function(window, undefined) {
 		}
 
 		statusText.innerHTML = message;
-		
+		textField.value = "";
+
 		return false;
 	}
 
@@ -154,7 +168,8 @@ window.app = window.app || (function(window, undefined) {
 
 	return {
 		ready: ready,
-		handleInput: handleInput
+		handleInput: handleInput,
+		toggleGrid: toggleGrid
 	};
 	
 
