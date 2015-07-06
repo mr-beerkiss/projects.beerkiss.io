@@ -1,5 +1,5 @@
 {
-  "bitwise": false,
+  "bitwise": true,
   "laxcomma": true,
   "camelcase": true,
   "curly": true,
@@ -26,7 +26,8 @@
   // define expected global objects
   // I think the boolean marks the object as read only
   "globals" : {
-    "app" : false
+    "app" : false,
+    "battleshipGrid" : false
   }
   
 }

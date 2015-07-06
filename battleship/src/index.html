@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<title>Battleship</title>
+
+		
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+	</head>
+	<body>
+
+		<header class="battleship-title">
+			<h1>Battleship</h1>
+		</header>
+
+		<button class="battleship-hide-grid-button" onclick="app.toggleGrid();">Show Grid</button>
+
+		<section class="battleship-grid hidden">
+			
+		</section>
+
+		<section class="battleship-console">
+			<p class="battleship-status-text">Game ready</p>
+		</section>
+
+		<section class="battleship-input">
+			<input class="battleship-input-text" type="text" placeholder="enter code here">
+			<button type="submit" onclick="app.handleInput()">Fire!</button>
+		</section>
+		
+		<!-- remove if release build -->	
+		<script src="http://localhost:35729/livereload.js"></script>  
+		
+		<script src="js/main.min.js"></script>
+	</body>
+</html>

@@ -2,7 +2,6 @@ var gulp = require("gulp"),
 	del = require("del"),
 	gutil = require("gutil"),
 	sass = require("gulp-sass"),
-	autoprefixer = require("gulp-autoprefixer"),
 	jshint = require("gulp-jshint"),
 	concat = require("gulp-concat"),
 	uglify = require("gulp-uglify"),
@@ -42,11 +41,7 @@ gulp.task("sass", function() {
 	// TODO: Auto-prefixer
 	gulp.src(paths.scss)
 		.pipe(sass())
-		.pipe(autoprefixer({
-			browsers: ["last 2 versions"],
-			cascade: false	
-		}))
-		//.pipe(minifycss())
+		.pipe(minifycss())
 		.pipe(gulp.dest(paths.dist+"/css"))
 		.on("error", gutil.log);	
 });
@@ -57,13 +52,13 @@ gulp.task("scripts", function() {
 		.pipe(jshint.reporter("default"))
 		.pipe(concat("main.min.js"))
 		.pipe(gulp.dest(paths.dist+"/js"))
-		.pipe(uglify({
+		/*.pipe(uglify({
 			// some options here: https://www.npmjs.com/package/gulp-uglify
 			// all options here: https://github.com/mishoo/UglifyJS2#the-simple-way
 			outSourceMaps: false,	// for generating .map. files 
 			mangle: true			// skip mangling names
 			}))
-		.pipe(gulp.dest(paths.dist+"/js"))
+		.pipe(gulp.dest(paths.dist+"/js"))*/
 		.on("error", gutil.log);
 
 });

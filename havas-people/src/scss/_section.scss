@@ -1,0 +1,46 @@
+.section {
+
+	$red-color: rgb(220, 2, 46);
+
+	margin: 0 10%;
+
+	color: #3a3a3a;
+	
+	.section-heading {
+			font-weight: 400;
+			text-align: center;
+			display: table;
+			background-color: $red-color;
+			color: white;
+			padding: 0.125em 0.25em;
+			position: relative;
+
+			&.section-heading__bubble:after {
+				content: "";
+				position: absolute;
+				bottom: -12px;
+				left: 15px;
+				border-width: 12px 8px 0;
+				border-style: solid;
+				border-color: $red-color transparent;
+				display: block;
+				width: 0;
+			}
+			
+	}
+
+	.section-sub-heading {
+		font-weight: 400;
+	}
+
+	.section-text {
+		font-size: 0.75em;
+	}
+
+	.section-divider {
+	  border-style: solid;
+	  border-width: 1px 0 0 0;
+	  color: rgb(201, 201, 201);
+	}
+
+}
