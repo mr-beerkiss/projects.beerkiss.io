@@ -10,7 +10,7 @@
       this.input.onDown.add(this.onInputDown, this);
 
       var bgImg = this.add.image(0, 0, "background");
-      this.scale.setSize(bgImg.width, bgImg.height);
+      //this.scale.setSize(bgImg.width, bgImg.height);
 
       this.gameWidth = bgImg.width;
       this.gameHeight = bgImg.height;
@@ -30,17 +30,17 @@
       //this.physics.arcade.setBounds(boundsXOffset, boundsYOffset, boundsWidth, boundsHeight);
       this.physics.arcade.setBounds(this.boundsRect.x, this.boundsRect.y, this.boundsRect.width, this.boundsRect.height);
 
-      
-
-
-      
-
       this.puck = this.add.sprite(0, 0, "puck");
 
       this.puck.anchor.set(0.5, 0.5);
 
-      this.puck.x = this.gameWidth/2;
-      this.puck.y = this.gameHeight/2;
+      this.initialPuckX = this.gameWidth/2;
+      this.initialPuckY = this.gameHeight/2;
+
+      this.puck.x = this.initialPuckX;
+      this.puck.y = this.initialPuckY;
+
+
 
       this.physics.enable(this.puck, Phaser.Physics.ARCADE);
 
@@ -80,6 +80,8 @@
       this.playerTwoController.x = (this.boundsRect.y+this.boundsRect.width) - this.playerTwoController.width;
       this.playerTwoController.y = this.gameHeight/2;
 
+      this.playerTwoController.visible = false;
+
       this.physics.enable(this.playerTwoController, Phaser.Physics.ARCADE);
 
       this.playerTwoController.body.immovable = true;
@@ -90,11 +92,74 @@
       this.playerOneController.scale.set(gameItemsScaling);
       this.playerTwoController.scale.set(gameItemsScaling);
 
+      this.goalAreaOne = this.add.sprite(0, 0, "1x1");
+
+      this.goalAreaOne.anchor.set(0.5, 0.5);
+      this.goalAreaOne.x = this.boundsRect.x;
+      this.goalAreaOne.y = this.gameHeight/2;
+
+      this.goalAreaOne.scale.set(6, 235);
+
+      this.goalAreaOne.tint = 0xff0000;
+      //this.goalAreaOne.tint = Math.random() * 0xffffff;
+
+      this.physics.enable(this.goalAreaOne, Phaser.Physics.ARCADE);
+
+      this.goalAreaOne.body.immovable = true;
+
+      this.goalAreaTwo = this.add.sprite(0, 0, "1x1");
+
+      this.goalAreaTwo.anchor.set(0.5, 0.5);
+      this.goalAreaTwo.x = this.boundsRect.x + this.boundsRect.width;
+      this.goalAreaTwo.y = this.gameHeight/2;
+
+      this.goalAreaTwo.scale.set(6, 235);
+      this.goalAreaTwo.tint = 0x00ff00;
+
+      this.physics.enable(this.goalAreaTwo, Phaser.Physics.ARCADE);
+
+      this.goalAreaTwo.body.immovable = true;
+
+      this.playerOneScore = 0;
+      this.playerTwoScore = 0;
+
+    },
+
+    goalCollision: function(goalArea, puck) {
+        
+
+      if ( goalArea === this.goalAreaOne ) {
+        //console.debug("Player 2 goal");
+        this.playerTwoScore += 1;
+      } else {
+        this.playerOneScore += 1;
+      }
+
+      this.puck.x = this.initialPuckX;
+      this.puck.y = this.initialPuckY;
+
+      this.puck.body.velocity.setTo(0);
+
+      this.updateScoreUI();
+
+    },
+
+    updateScoreUI() {
+        if ( typeof this.playerOneScoreElm === "undefined" ) {
+          this.playerOneScoreElm = document.querySelector(".game-ui-player-one-score-value");
+          this.playerTwoScoreElm = document.querySelector(".game-ui-player-two-score-value");
+        }
+
+        this.playerOneScoreElm.innerHTML = "" + this.playerOneScore;
+        this.playerTwoScoreElm.innerHTML = "" + this.playerTwoScore;
     },
 
     update: function () {
-      this.physics.arcade.collide(this.playerOneController, this.puck);
-      this.physics.arcade.collide(this.playerTwoController, this.puck);
+      this.physics.arcade.collide([this.playerOneController, this.playerTwoController], this.puck);
+      //this.physics.arcade.collide(this.playerTwoController, this.puck);
+
+      this.physics.arcade.collide([this.goalAreaOne, this.goalAreaTwo], this.puck, this.goalCollision, null, this);
+      //this.physics.arcade.collide(this.goalAreaTwo, this.puck, this.goal, null, this);
 
       //this.controller.body.velocity.setTo(0, 0);
 

@@ -1,3 +1,23 @@
 html, body {
 	margin: 0;
 }
+
+.game-ui {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	/*background-color: red;*/
+	color: white;
+
+	font-family: Arial;
+	text-transform: uppercase;
+	font-size: 32px;
+}
+.game-ui-player-score {
+	display: inline-block;
+	margin: 15px;
+}
+.player-two {
+	float: right;
+}

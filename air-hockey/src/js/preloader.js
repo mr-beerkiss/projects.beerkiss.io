@@ -23,6 +23,8 @@
       this.load.image("controller-1", "assets/controller_2.png");
       this.load.image("controller-2", "assets/controller.png");
       this.load.image("puck", "assets/puck.png");
+      //this.load.image("1x1", "assets/1x1.png");
+      this.load.image("1x1", "assets/1x1-white.jpeg");
     },
 
     create: function () {
