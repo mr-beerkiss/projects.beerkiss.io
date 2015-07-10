@@ -17,9 +17,9 @@
       } else {
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.minWidth =  480;
-        this.game.scale.minHeight = 260;
-        this.game.scale.maxWidth = 600;
-        this.game.scale.maxHeight = 407;
+        this.game.scale.minHeight = 460;
+        this.game.scale.maxWidth = 1920;
+        this.game.scale.maxHeight = 1080;
         this.game.scale.forceOrientation(true);
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.setScreenSize(true);
